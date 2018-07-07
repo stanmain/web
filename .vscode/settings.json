@@ -1,0 +1,4 @@
+{
+    "python.linting.enabled": false,
+    "python.pythonPath": "/home/stan/anaconda3/bin/python"
+}
