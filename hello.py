@@ -1,16 +1,13 @@
-# def app(environ, start_response):
-#     """Simplest possible application object"""
-#     data = b'Hello, World!\n'
-#     status = '200 OK'
-#     response_headers = [
-#         ('Content-type', 'text/plain'),
-#         ('Content-Length', str(len(data)))
-#     ]
-#     start_response(status, response_headers)
-#     return iter([data])
+from urllib import parse
+
 
 def app(environ, start_response):
-    data = b"Hello, World!\n"
+    data = b''
+    query = parse.parse_qs(environ['QUERY_STRING'])
+    for key, value in query.items():
+        for item in value:
+            data += '{}={}\n'.format(key, item).encode()
+            
     start_response("200 OK", [
         ("Content-Type", "text/plain"),
         ("Content-Length", str(len(data)))
