@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 # from django.urls import url as path
 from django.conf.urls import url as path 
-from django.urls import include
+from django.conf.urls import include
 
 from qa.urls import urlpatterns as qa_urls
 

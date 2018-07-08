@@ -14,10 +14,10 @@ class QuestionManager(models.Manager):
 class Question(models.Model):
     objects=QuestionManager()
 
-    title = models.CharField()
+    title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
-    rating = models.FloatField(default=0)
+    rating = models.IntegerField(default=0)
     author = models.ManyToManyField(User, related_name='ques_author')
     likes = models.ManyToManyField(User, related_name='likes_set')
 
@@ -26,4 +26,4 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     question = models.OneToOneField(Question)
-    author = models.ManyToManyField(User, related_name='answ_author')
+    author = models.ForeignKey(User, blank=True)
