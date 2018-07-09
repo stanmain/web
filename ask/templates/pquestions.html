@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Popular question</title>
+    </head>
+    <body>
+        <p>Popular:</p>
+        {% for p in paginator.page_range %}
+            {% if p.number == page.number %}
+            <li class="active">
+            {% else %}
+            <li>
+            {% endif %}
+                <h3>{{p.title}}</h3>
+                <a href="{{ paginator.baseurl }}{{ p.number }}">
+                {{ p.number }}</a>
+            </li>
+        {% endfor %}
+    </body>
+</html>

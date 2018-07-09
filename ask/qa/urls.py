@@ -20,11 +20,11 @@ from django.conf.urls import url as path
 from qa import views
 
 urlpatterns = [
-    path(r'^$', views.test),
+    path(r'^$', views.page),
     path(r'^login/$', views.test),
     path(r'^signup/$', views.test),
-    path(r'^question/[^/]+/$', views.test),
+    path(r'^question/(?P<slug>\d+)/$', views.question),
     path(r'^ask/$', views.test),
-    path(r'^popular/$', views.test),
+    path(r'^popular/$', views.popular),
     path(r'^new/$', views.test)
 ]

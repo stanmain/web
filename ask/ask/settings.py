@@ -55,7 +55,7 @@ ROOT_URLCONF = 'ask.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,12 +76,19 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':   'mybase',
-        'USER':   'admin',
-        'PASSWORD': 'pass111',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':   'mybase'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME':   'mybase',
+#         'USER':   'admin',
+#         'PASSWORD': 'pass111',
+#     }
+# }
 
 
 # Password validation

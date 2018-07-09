@@ -14,4 +14,3 @@ python manage.py makemigrations
 python manage.py migrate
 
 gunicorn -c /home/box/web/etc/ask.py ask.wsgi
-

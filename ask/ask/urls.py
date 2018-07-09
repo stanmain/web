@@ -22,11 +22,5 @@ from qa.urls import urlpatterns as qa_urls
 
 urlpatterns = [
     path(r'^admin/$', admin.site.urls),
-    path(r'^$', include(qa_urls)),
-    path(r'^login/$', include(qa_urls)),
-    path(r'^signup/$', include(qa_urls)),
-    path(r'^question/[^/]+/$', include(qa_urls)),
-    path(r'^ask/$', include(qa_urls)),
-    path(r'^popular/$', include(qa_urls)),
-    path(r'^new/$', include(qa_urls))
+    path(r'^', include(qa_urls))
 ]
