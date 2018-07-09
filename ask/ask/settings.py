@@ -74,21 +74,21 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':   'mybase'
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME':   'mybase',
-#         'USER':   'admin',
-#         'PASSWORD': 'pass111',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME':   'mybase'
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':   'mybase',
+        'USER':   'admin',
+        'PASSWORD': 'pass111',
+    }
+}
 
 
 # Password validation
