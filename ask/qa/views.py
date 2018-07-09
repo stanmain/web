@@ -28,10 +28,12 @@ def page(request, *args, **kwargs):
     except EmptyPage:
         page = paginator.page(paginator.num_pages)
     
-    return render(request, 'nquestions.html', {
+    r = render(request, 'nquestions.html', {
         'posts': page.object_list,
         'paginator': paginator, 'page': page,
     })
+    print(r.content)
+    return r
 
 
 def popular(request, *args, **kwargs):
@@ -49,10 +51,12 @@ def popular(request, *args, **kwargs):
     except EmptyPage:
         page = paginator.page(paginator.num_pages)
     
-    return render(request, 'pquestions.html', {
+    r = render(request, 'pquestions.html', {
         'posts': page.object_list,
         'paginator': paginator, 'page': page,
     })
+    print(r.content)
+    return r
 
 def question(request, *args, **kwargs):
     try:
@@ -66,7 +70,9 @@ def question(request, *args, **kwargs):
         raise Http404
         # return HttpResponseNotFound()
 
-    return render(request, 'cquestion.html', {
+    r = render(request, 'cquestion.html', {
         'question' : concreate, 
         'slug' : slug
     })
+    print(r.content)
+    return r
