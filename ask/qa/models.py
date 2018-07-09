@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class QuestionManager(models.Manager):
     def new(self):
-        return self.order_by('-id')
+        return Question.objects.order_by('-id')
 
     def popular(self):
         return self.order_by('-rating')
@@ -33,5 +33,5 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
-    question = models.OneToOneField(Question)#, related_name='answer_set')
+    question = models.OneToOneField(Question, related_name='answer_set')
     author = models.ForeignKey(User)#, models.DO_NOTHING)
