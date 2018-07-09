@@ -6,14 +6,14 @@
     <body>
         <p>Popular:</p>
         {% for p in paginator.page_range %}
-            {% if p.number == page.number %}
+            {% if p == page.number %}
             <li class="active">
             {% else %}
             <li>
             {% endif %}
                 <h3>{{p.title}}</h3>
-                <a href="{{ paginator.baseurl }}{{ p.number }}">
-                {{ p.number }}</a>
+                <a href="{{ paginator.baseurl }}{{ p }}">
+                {{ p }}</a>
             </li>
         {% endfor %}
     </body>
