@@ -26,12 +26,12 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User, models.DO_NOTHING)
+    author = models.ForeignKey(User)#, models.DO_NOTHING)
     likes = models.ManyToManyField(User, related_name='likes_set')
 
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
-    question = models.OneToOneField(Question, models.DO_NOTHING)
-    author = models.ForeignKey(User, models.DO_NOTHING)
+    question = models.OneToOneField(Question)#, related_name='answer_set')
+    author = models.ForeignKey(User)#, models.DO_NOTHING)
