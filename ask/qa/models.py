@@ -33,5 +33,5 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
-    question = models.OneToOneField(Question, related_name='answer_set')
+    question = models.ForeignKey(Question)
     author = models.ForeignKey(User)#, models.DO_NOTHING)

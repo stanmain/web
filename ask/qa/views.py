@@ -70,7 +70,7 @@ def question(request, *args, **kwargs):
     if concreate is None:
         raise Http404
         # return HttpResponseNotFound()
-    answers = concreate.objects.GET.get('answer')
+    answers = models.Answer.objects.filter(question=concreate)
 
     r = render(request, 'cquestion.html', {
         'question' : concreate, 
