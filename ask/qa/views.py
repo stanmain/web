@@ -53,7 +53,8 @@ def popular(request, *args, **kwargs):
     
     r = render(request, 'pquestions.html', {
         'posts': page.object_list,
-        'paginator': paginator, 'page': page,
+        'paginator': paginator, 
+        'page': page,
     })
     print(r.content)
     return r
@@ -69,10 +70,12 @@ def question(request, *args, **kwargs):
     if concreate is None:
         raise Http404
         # return HttpResponseNotFound()
+    answers = concreate.objects.GET.get('answer')
 
     r = render(request, 'cquestion.html', {
         'question' : concreate, 
-        'slug' : slug
+        'slug' : slug,
+        'answers' : answers
     })
     print(r.content)
     return r

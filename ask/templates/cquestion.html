@@ -7,5 +7,9 @@
         <h2>{{question.title}}</h2>
         <p><</p>
         <p>{{question.text}}</p>
+        <p>Answers:</p>
+        {% for p in answers %}
+            <h3>{{p.text}}</h3>
+        {% endfor %}
     </body>
 </html>
