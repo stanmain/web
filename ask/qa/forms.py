@@ -23,7 +23,7 @@ class AskForm(forms.Form):
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
-    question = forms.CharField(widget=forms.HiddenInput)
+    question = forms.IntegerField(widget=forms.HiddenInput)
 
     def clean(self):
         if len(self.cleaned_data['text']) < 5:
