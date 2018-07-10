@@ -26,7 +26,7 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     # !!!!!!!!!!
     author = models.ForeignKey(User, blank=True, null=True) # models.DO_NOTHING,
-    likes = models.ManyToManyField(User, related_name='likes_set', blank=True, null=True)
+    likes = models.ManyToManyField(User, related_name='likes_set', blank=True)
 
     def get_url(self):
         return '/question/{}/'.format(self.pk)
@@ -36,5 +36,5 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     # !!!!!!!!!!
-    question = models.ForeignKey(Question)#, models.DO_NOTHING)
+    question = models.ForeignKey(Question)
     author = models.ForeignKey(User, blank=True, null=True)#, models.DO_NOTHING)

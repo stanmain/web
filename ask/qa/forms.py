@@ -10,7 +10,7 @@ class AskForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
 
     def clean(self):
-        if len(self.cleaned_data['title']) < 5 or len(self.cleaned_data['text']) < 5:
+        if len(self.cleaned_data['title']) == 0 or len(self.cleaned_data['text']) == 0:
             raise forms.ValidationError('Empty!')
         # return self.cleaned_data
 
@@ -26,7 +26,7 @@ class AnswerForm(forms.Form):
     question = forms.IntegerField(widget=forms.HiddenInput)
 
     def clean(self):
-        if len(self.cleaned_data['text']) < 5:
+        if len(self.cleaned_data['text']) == 0:
             raise forms.ValidationError('Empty!')
 
     def clean_question(self):
