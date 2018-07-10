@@ -37,4 +37,4 @@ class Answer(models.Model):
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     # !!!!!!!!!!
     question = models.ForeignKey(Question)#, models.DO_NOTHING)
-    author = models.ForeignKey(User)#, models.DO_NOTHING, blank=True, null=True)
+    author = models.ForeignKey(User, blank=True, null=True)#, models.DO_NOTHING)
