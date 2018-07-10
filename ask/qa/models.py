@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-
 
 class QuestionManager(models.Manager):
     def new(self):
@@ -17,21 +15,26 @@ class QuestionManager(models.Manager):
         except Question.DoesNotExist:
             question = None
         return question
+        
 
 
 class Question(models.Model):
-    objects=QuestionManager()
-
+    objects = QuestionManager()
     title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User)#, models.DO_NOTHING)
-    likes = models.ManyToManyField(User, related_name='likes_set')
+    # !!!!!!!!!!
+    author = models.ForeignKey(User, blank=True, null=True) # models.DO_NOTHING,
+    likes = models.ManyToManyField(User, related_name='likes_set', blank=True, null=True)
+
+    def get_url(self):
+        return '/question/{}/'.format(self.pk)
 
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
-    question = models.ForeignKey(Question)
-    author = models.ForeignKey(User)#, models.DO_NOTHING)
+    # !!!!!!!!!!
+    question = models.ForeignKey(Question)#, models.DO_NOTHING)
+    author = models.ForeignKey(User)#, models.DO_NOTHING, blank=True, null=True)

@@ -24,7 +24,7 @@ urlpatterns = [
     path(r'^login/$', views.test),
     path(r'^signup/$', views.test),
     path(r'^question/(?P<slug>\d+)/$', views.question),
-    path(r'^ask/$', views.test),
+    path(r'^ask/$', views.ask),
     path(r'^popular/$', views.popular),
     path(r'^new/$', views.test)
 ]

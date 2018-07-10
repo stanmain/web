@@ -1,0 +1,25 @@
+Список:
+{{form.as_ul}}
+Параграф:
+{{form.as_p}}
+Таблица:
+{{form.as_ul}}
+
+{% for e in form.non_field_errors %}
+    <div>{{ e }}</div>
+{% endfor %}
+<form method="POST" action="/blog/add">
+    {% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+            <div>
+                {% if field.errors %} has-error {% endif %}
+                <label>{{ field.label }}</label>
+                <div>{{ field }}</div>
+            </div>
+        {% endfor %}
+    </fieldset>
+    <div>
+        <button type="submit"> Save </button>
+    </div>
+</form>

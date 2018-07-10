@@ -21,6 +21,6 @@ from django.conf.urls import include
 from qa.urls import urlpatterns as qa_urls
 
 urlpatterns = [
-    path(r'^admin/$', admin.site.urls),
+    path(r'^admin/', admin.site.urls),
     path(r'^', include(qa_urls))
 ]

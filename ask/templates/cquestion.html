@@ -7,6 +7,27 @@
         <h2>{{question.title}}</h2>
         <p><</p>
         <p>{{question.text}}</p>
+
+        <h2>Enter your answer:</h2>
+        {% for e in form.non_field_errors %}
+            <div>{{ e }}</div>
+        {% endfor %}
+        <form method="POST" action={{ action }}>
+            {% csrf_token %}
+            <fieldset>
+                {% for field in form %}
+                    <div>
+                        {% if field.errors %} has-error {% endif %}
+                        <label>{{ field.label }}</label>
+                        <div>{{ field }}</div>
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <div>
+                <button type="submit"> Save </button>
+            </div>
+        </form>
+
         <p>Answers:</p>
         {% for p in answers %}
             <h3>{{p.text}}</h3>
