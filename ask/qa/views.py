@@ -174,7 +174,7 @@ def signup(request):
         form = forms.SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # login(request, user)
+            login2(request, user)
             return HttpResponseRedirect('/')
     else:
         form = forms.SignupForm()
