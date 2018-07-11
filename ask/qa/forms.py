@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-
+from django.contrib.auth import authenticate
 
 from qa import models
 
@@ -8,6 +8,7 @@ from qa import models
 class AskForm(forms.Form):
     title = forms.CharField(max_length=128)
     text = forms.CharField(widget=forms.Textarea)
+    author = forms.HiddenInput()
 
     def clean(self):
         if len(self.cleaned_data['title']) == 0 or len(self.cleaned_data['text']) == 0:
@@ -15,8 +16,9 @@ class AskForm(forms.Form):
         # return self.cleaned_data
 
     def save(self):
-        print(self.cleaned_data)
+        # print(self.cleaned_data)
         question = models.Question(**self.cleaned_data)
+        # question.author = self.user
         question.save()
         return question
 
@@ -36,6 +38,54 @@ class AnswerForm(forms.Form):
         answer = models.Answer(**self.cleaned_data)
         answer.save()
         return answer
+
+
+class SignupForm(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField()
+    password = forms.CharField()
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        # print(username)
+        try:
+            models.User.objects.get(username=username)
+        except models.User.DoesNotExist:
+            return username
+        raise forms.ValidationError('User already exists.')
+
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        # print(email)
+        try:
+            models.User.objects.get(email=email)
+        except models.User.DoesNotExist:
+            return email
+        raise forms.ValidationError('User already exists.')
+
+    def save(self):
+        # print(self.cleaned_data)
+        user = models.User.objects.create_user(**self.cleaned_data)
+        user.save()
+        return user
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField()
+    
+    def clean(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        self._user = authenticate(username=username, password=password)
+        if self._user is None:
+            raise forms.ValidationError('User don`t exists.')
+        # print(self._user.username)
+        return self.cleaned_data
+    
+    def save(self):
+        return self._user
 
 
 # class FeedbackForm(forms.Form):

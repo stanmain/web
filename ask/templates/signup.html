@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Question - {{slug}}</title>
+        <title>Signup</title>
     </head>
     <body>
-        <h2>{{question.title}}</h2>
-        <h3>{{ question.author }}</h3>
-        <p><</p>
-        <p>{{question.text}}</p>
-
-        <h2>Enter your answer:</h2>
+        <h2>Register:</h2>
         {% for e in form.non_field_errors %}
             <div>{{ e }}</div>
         {% endfor %}
@@ -28,10 +23,5 @@
                 <button type="submit"> Save </button>
             </div>
         </form>
-
-        <p>Answers:</p>
-        {% for p in answers %}
-            <h3>{{p.text}}</h3>
-        {% endfor %}
     </body>
 </html>

@@ -21,8 +21,9 @@ from qa import views
 
 urlpatterns = [
     path(r'^$', views.page),
-    path(r'^login/$', views.test),
-    path(r'^signup/$', views.test),
+    path(r'^login/$', views.login),
+    path(r'^logout/$', views.logout),
+    path(r'^signup/$', views.signup),
     path(r'^question/(?P<slug>\d+)/$', views.question),
     path(r'^ask/$', views.ask),
     path(r'^popular/$', views.popular),

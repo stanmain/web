@@ -17,7 +17,6 @@ class QuestionManager(models.Manager):
         return question
         
 
-
 class Question(models.Model):
     objects = QuestionManager()
     title = models.CharField(max_length=255)
@@ -25,7 +24,7 @@ class Question(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     # !!!!!!!!!!
-    author = models.ForeignKey(User, blank=True, null=True) # models.DO_NOTHING,
+    author = models.ForeignKey(User, blank=True, null=True) # models.DO_NOTHING, 
     likes = models.ManyToManyField(User, related_name='likes_set', blank=True)
 
     def get_url(self):
@@ -36,5 +35,5 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     # !!!!!!!!!!
-    question = models.ForeignKey(Question)
-    author = models.ForeignKey(User, blank=True, null=True)#, models.DO_NOTHING)
+    question = models.ForeignKey(Question) # , models.DO_NOTHING
+    author = models.ForeignKey(User, blank=True, null=True) # , models.DO_NOTHING

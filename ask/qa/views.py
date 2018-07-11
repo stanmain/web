@@ -4,6 +4,11 @@ from django.core.paginator import Paginator, EmptyPage
 from django.http import HttpResponse, Http404
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login2
+from django.contrib.auth import logout as logout2
+
+from datetime import datetime, timedelta
 
 from qa import models
 from qa import forms
@@ -78,6 +83,8 @@ def question(request, *args, **kwargs):
         form = forms.AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save()
+            if request.user.is_authenticated:
+                answer.author = request.user
             url = request.path
             return HttpResponseRedirect(url)
     else:
@@ -96,11 +103,16 @@ def question(request, *args, **kwargs):
     return r
 
 
+# @login_required(login_url='/login/')
 def ask(request):
     if request.method == 'POST':
         form = forms.AskForm(request.POST)
         if form.is_valid():
+            # form.user = request.user
             question = form.save()
+            if request.user.is_authenticated:
+                question.author = request.user
+            question.save()
             url = question.get_url()
             return HttpResponseRedirect(url)
     else:
@@ -114,6 +126,65 @@ def ask(request):
     # print(r.content)
     return r
 
+
+def login(request):
+    if request.method == 'POST':
+        # print('1')
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            # print('2')
+            user = form.save()
+            # login(request, user)
+            # print('2.5')
+            login2(request, user)
+            # print('3')
+
+            r = HttpResponseRedirect('/')
+            print(r)
+            return r
+            # if sessid:
+            #     print('4')
+            #     response = HttpResponseRedirect('/')
+            #     response.set_cookie(
+            #         sessid=sessid,
+            #         domain='127.0.0.1',
+            #         httponly=True,
+            #         expires=datetime.now()+timedelta(days=5)
+            #     )
+            #     return response
+    else:
+        # print('5')
+        form = forms.LoginForm()
+    # print('6')
+    action = '/login/'
+    r = render(request, 'login.html', {
+        'form': form,
+        'action': action,
+    })
+    # print(r.content)
+    return r
+
+def logout(request):
+    logout2(request)
+    return HttpResponseRedirect('/')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = forms.SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # login(request, user)
+            return HttpResponseRedirect('/')
+    else:
+        form = forms.SignupForm()
+    action = '/signup/'
+    r = render(request, 'signup.html', {
+        'form': form,
+        'action': action,
+    })
+    # print(r.content)
+    return r
 
 # def post_add(request):
 #     if request.method = 'POST':
